@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+
+    <script>
+    // Then some JavaScript in the browser:
+    var conn = new WebSocket('ws://10.67.199.58:8080/chat');
+    conn.onmessage = function(e) { console.log(e.data); };
+    conn.onopen = function(e) { conn.send('Hello Me!'); };
+    </script>
+  </head>
+
+  <body>
+    siema
+  </body>
+</html>
