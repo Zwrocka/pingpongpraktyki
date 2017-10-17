@@ -4,20 +4,6 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <meta charset="UTF-8">
     <title>title</title>
-    <script>
-    // Then some JavaScript in the browser:
-    var conn = new WebSocket('ws://localhost:8080/points');
-	conn.onmessage = function(e) { console.log(e.data); };
-    conn.onopen = function(e) { conn.send('connect'); };
-	$('.plus').onclick = (function()
-	{		
-	conn.emit("increment");	
-	})j
-	$('.minus').onclick = (function()
-	{		
-	conn.emit("decrement");	
-	})
-    </script>
   </head>
 
   <body>
@@ -27,5 +13,4 @@
 	  
   </body>
 	<script src="app.js"></script>
-	
 </html>
