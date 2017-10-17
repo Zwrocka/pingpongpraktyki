@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <meta charset="UTF-8">
     <title>title</title>
     <script>
@@ -11,7 +12,7 @@
 	$('.plus').onclick = (function()
 	{		
 	conn.emit("increment");	
-	})
+	})j
 	$('.minus').onclick = (function()
 	{		
 	conn.emit("decrement");	
@@ -26,5 +27,5 @@
 	  
   </body>
 	<script src="app.js"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	
 </html>
