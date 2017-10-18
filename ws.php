@@ -9,7 +9,7 @@ use Ratchet\ConnectionInterface;
  * chat.php
  * Send any incoming messages to all connected clients (except sender)
  */
-class MyChat implements MessageComponentInterface {
+class Points implements MessageComponentInterface {
     protected $clients;
     protected $points;
     
@@ -30,18 +30,17 @@ class MyChat implements MessageComponentInterface {
     public function onMessage(ConnectionInterface $from, $msg) {
         foreach ($this->clients as $client) {          
             if($msg=='increment'){
-                $score_update_inc=$this->points++;
-                echo 'inc: '.$score_update_inc."\n";
-                $client->send($score_update_inc);
+                $this->points++;
+                echo 'inc: '.$this->points."\n";
+                $client->send('score_update_inc');
             }
             else if ($msg=='decrement'){
                 $this->points--;
-                $score_update_dec=$this->points++;
-                echo 'dec: '.$score_update_dec."\n";
-                $client->send($score_update_dec);
+                echo 'dec: '.$this->points."\n";
+                $client->send('score_update_dec');
             }
             else{
-                echo 'Błąd ponieważ wartość $msg='.$msg;
+                echo 'Błąd ponieważ wartość $msg='.$msg."\n";
             }
         }
     }
@@ -58,6 +57,6 @@ class MyChat implements MessageComponentInterface {
 
     // Run the server application through the WebSocket protocol on port 8080
     $app = new Ratchet\App('localhost', 8080);
-    $app->route('/chat', new MyChat);
+    $app->route('/points', new Points);
     $app->route('/echo', new Ratchet\Server\EchoServer, array('*'));
     $app->run();
