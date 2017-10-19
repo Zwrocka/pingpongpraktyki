@@ -1,14 +1,14 @@
-var conn = new WebSocket('ws://localhost:8080/points');
+var conn = new WebSocket('ws://10.67.199.59:8080/points');
 var initialScore = 0;
 conn.onmessage = function(e) { 
     console.log(e.data); 
     if(e.data=='score_update_inc'){
        initialScore++; 
-        alert("dodano");
+        $('.scoreupdate').text(initialScore);
     }
     else if(e.data=='score_update_dec'){
         initialScore--;
-        alert("odjęto");
+        $('.scoreupdate').text(initialScore);
     }
     // musisz nadsluchiwac na wiadomosc z backendu i updatowac UI .text()
     // TODO dodac logike
