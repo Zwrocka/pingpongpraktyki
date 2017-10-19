@@ -5,11 +5,11 @@ conn.onmessage = function(e) {
     if(e.data=='score_update_inc'){
        initialScore++; 
         alert("dodano");
-    };
+    }
     else if(e.data=='score_update_dec'){
         initialScore--;
         alert("odjęto");
-    };
+    }
     // musisz nadsluchiwac na wiadomosc z backendu i updatowac UI .text()
     // TODO dodac logike
     
