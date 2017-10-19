@@ -1,8 +1,9 @@
 var conn = new WebSocket('ws://localhost:8080/points');
 var initailScore = 0;
-conn.onmessage = function(e) { 
+conn.onmessage = $('.scoreupdate').text
+function(e) { 
     console.log(e.data); 
-    
+
     if(e.data=='score_update_inc'){
        initialScore++; 
         alert("dodano");
