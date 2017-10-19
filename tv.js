@@ -1,5 +1,5 @@
 var conn = new WebSocket('ws://localhost:8080/points');
-var initailScore =  $('.scoreupdate').text 0;
+var initailScore =  $('.scoreupdate') 0;
 conn.onmessage = function(e) { 
     console.log(e.data); 
     if(e.data=='score_update_inc'){
