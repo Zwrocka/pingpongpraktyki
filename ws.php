@@ -38,22 +38,18 @@ class Points implements MessageComponentInterface {
             if($msg=='incrementFirst'){
                 $this->pointsone++;
                 echo 'inc: '.$this->pointsone."\n";
-                $client->send('score_update_inc');
             }
             else if ($msg=='decrementFirst'){
                 $this->pointsone--;
                 echo 'dec: '.$this->pointsone."\n";
-                $client->send('score_update_dec');
             }
             else if ($msg=='decrementSecond'){
                 $this->pointstwo++;
                 echo 'dec: '.$this->pointstwo."\n";
-                $client->send('score_update_dec');
             }
             else if ($msg=='decrementSecond'){
                 $this->pointstwo--;
                 echo 'dec: '.$this->pointstwo."\n";
-                $client->send('score_update_dec');
             }
             else{
                 echo 'Błąd ponieważ wartość $msg='.$msg."\n";
