@@ -24,22 +24,35 @@ class Points implements MessageComponentInterface {
     public function onOpen(ConnectionInterface $conn) {
         $this->clients->attach($conn);
 
-        if(!isset($this->points)){
-            $this->points=0;
+        if(!isset($this->pointsone)
+            $this->pointsone=0;
+        }
+        if(!isset($this->pointstwo)
+            $this->pointstwo=0;
         }
         echo 'client connected';
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
         foreach ($this->clients as $client) {          
-            if($msg=='increment'){
-                $this->points++;
-                echo 'inc: '.$this->points."\n";
+            if($msg=='incrementFirst'){
+                $this->pointsone++;
+                echo 'inc: '.$this->pointsone."\n";
                 $client->send('score_update_inc');
             }
-            else if ($msg=='decrement'){
-                $this->points--;
-                echo 'dec: '.$this->points."\n";
+            else if ($msg=='decrementFirst'){
+                $this->pointsone--;
+                echo 'dec: '.$this->pointsone."\n";
+                $client->send('score_update_dec');
+            }
+            else if ($msg=='decrementSecond'){
+                $this->pointstwo++;
+                echo 'dec: '.$this->pointstwo."\n";
+                $client->send('score_update_dec');
+            }
+            else if ($msg=='decrementSecond'){
+                $this->pointstwo--;
+                echo 'dec: '.$this->pointstwo."\n";
                 $client->send('score_update_dec');
             }
             else{
@@ -50,7 +63,9 @@ class Points implements MessageComponentInterface {
 
     public function onClose(ConnectionInterface $conn) {
         $this->clients->detach($conn);
-        $this->points = 0;
+        $this->pointsone = 0;
+        $this->pointstwo = 0;
+        
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {

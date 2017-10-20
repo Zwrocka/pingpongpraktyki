@@ -3,14 +3,64 @@
   <head>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <meta charset="UTF-8">
-    <title>title</title>	
+    <title>title</title>
+      <style>
+          #container
+          {
+            width: 280px;
+            height:280px;
+            border:3px solid black;
+          }
+          .box
+          {
+              float:left;
+              padding:30px;
+              
+          }
+          .scoreupdatex
+          {
+              padding:10px;
+          }
+          .scoreupdatey
+          {
+              padding:10px;
+          }
+          #przerwa
+          {
+              float:left;
+              margin-top:30px;     
+          }
+          h1
+          {
+              font-size:50px;
+              color:blue;
+          }
+          button
+          {
+              border-radius:50%;
+              border:0px;
+              background-color:red;
+              font-size:30px;
+          }
+      </style>
   </head>
 
   <body>
-	  
+      <div id="container">
+      <div class="box">
+      <h1 class="scoreupdatex">0</h1>
 	  <button class="plus">+</button>
 	  <button class="minus">-</button>
-	  
+      </div>
+          <div id="przerwa">
+        <h1 class="scoreupdat">:</h1>
+          </div>
+      <div class="box">
+      <h1 class="scoreupdatey">0</h1>
+	  <button class="pluss">+</button>
+	  <button class="minuss">-</button>
+          </div>
+      </div>
   </body>
 	<script src="app.js"></script>
 </html>

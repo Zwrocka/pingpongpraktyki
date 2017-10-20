@@ -1,4 +1,4 @@
-var conn = new WebSocket('ws://10.67.199.58:8080/points');
+var conn = new WebSocket('ws://localhost:8080/points');
 var initialScore = 0;
 conn.onmessage = function(e) { 
     console.log(e.data); 
