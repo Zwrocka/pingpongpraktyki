@@ -93,6 +93,6 @@ class Points implements MessageComponentInterface {
     }
 }
 
-    // Run the server application through the WebSocket protocol on port 8080
+    // Rurn the server application through the WebSocket protocol on port 8080
     $server = IoServer::factory(new HttpServer(new WsServer(new Points())), 8080);
     $server->run();

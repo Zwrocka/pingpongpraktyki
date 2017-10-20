@@ -1,4 +1,4 @@
-	// Then some JavaScript in the browser:
+	// Then some JavaScript in the browserr:
     var conn = new WebSocket('ws://localhost:8080/points');
     var initialScore = 0;
     var initialScoree = 0;
