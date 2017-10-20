@@ -10,7 +10,7 @@
         initialScore++; 
         $('.scoreupdatex').text(initialScore);
 		console.log("Inkrementuje");
-		conn.send("incrementFirt");
+		conn.send("incrementFirst");
 	});
 	$('.minus').click(function() {
         initialScore--; 

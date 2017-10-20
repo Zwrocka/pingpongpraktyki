@@ -1,26 +1,25 @@
 var conn = new WebSocket('ws://localhost:8080/points');
-var initialScore = 0;
+//$('button.first').click function(){
+//$('input.gds').
+//}
 conn.onmessage = function(e) { 
     console.log(e.data); 
-    if(e.data=='score_update_inc'){
-       initialScore++; 
-        $('.scoreupdate').text(initialScore);
-    }
-    else if(e.data=='score_update_dec'){
-        initialScore--;
-        $('.scoreupdate').text(initialScore);
-    }
-    // musisz nadsluchiwac na wiadomosc z backendu i updatowac UI .text()
-    // TODO dodac logike
+    var myObj = JSON.parse(e.data);
+    $('.scoreupdate').text(myObj.pointsone);
     
-}; 
-
-conn.onopen = function(e) { 
-    conn.send('connect'); 
+    $('.scoreupdate2').text(myObj.pointstwo);
+    console.log("parsuje");
 };
+
+    
+conn.onopen = function(e) {
+//    conn.send('connect'); 
+};
+
 conn.onclose = function(e) { 
-    conn.send('disconnect');
+//    conn.send('disconnect');
 };    
-conn.onerror=function(){
-	console.log("error")
+
+conn.onerror=function(e){
+	console.error(e)
 };

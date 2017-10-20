@@ -18,24 +18,37 @@ class Points implements MessageComponentInterface {
     
     public function __construct() {
         $this->clients = new \SplObjectStorage;
+        $this->pointsone=0;
+        $this->pointstwo=0;
+       
         echo "Hello world";
+    }
+    
+    public function startMatch() {
+        // zerujesz wynik i wysylasz zaaktualizowany
+    }
+    
+    public function endMatch() {
+        // zerujesz wynik
     }
 
     public function onOpen(ConnectionInterface $conn) {
         $this->clients->attach($conn);
+        
+        $myObj = new stdClass();
+        $myObj->pointsone = $this->pointsone;
+        $myObj->pointstwo = $this->pointstwo;
 
-        if(!isset($this->pointsone)
-            $this->pointsone=0;
-        }
-        if(!isset($this->pointstwo)
-            $this->pointstwo=0;
-        }
+        $myJSON = json_encode($myObj);
+        
+        $conn->send($myJSON);
         echo 'client connected';
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        foreach ($this->clients as $client) {          
-            if($msg=='incrementFirst'){
+        
+        // reagujesz na dwa nowe wiadomosc - startMatch i endMatch
+        if($msg=='incrementFirst'){
                 $this->pointsone++;
                 echo 'inc: '.$this->pointsone."\n";
             }
@@ -43,7 +56,7 @@ class Points implements MessageComponentInterface {
                 $this->pointsone--;
                 echo 'dec: '.$this->pointsone."\n";
             }
-            else if ($msg=='decrementSecond'){
+            else if ($msg=='incrementSecond'){
                 $this->pointstwo++;
                 echo 'dec: '.$this->pointstwo."\n";
             }
@@ -55,19 +68,24 @@ class Points implements MessageComponentInterface {
                 echo 'Błąd ponieważ wartość $msg='.$msg."\n";
             }
             
-            $myObj->pointsone = $pointsone;
-            $myObj->pointstwo = $pointstwo;
+            if (!isset($res)) {
+                $myObj = new stdClass();
+            }
+            
+            $myObj->pointsone = $this->pointsone;
+            $myObj->pointstwo = $this->pointstwo;
             
             $myJSON = json_encode($myObj);
+        
+        
+        foreach ($this->clients as $client) {          
+            
             $client->send($myJSON);
         }
     }
 
     public function onClose(ConnectionInterface $conn) {
-        $this->clients->detach($conn);
-        $this->pointsone = 0;
-        $this->pointstwo = 0;
-        
+        $this->clients->detach($conn);        
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
