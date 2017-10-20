@@ -58,6 +58,12 @@ class Points implements MessageComponentInterface {
             else{
                 echo 'Błąd ponieważ wartość $msg='.$msg."\n";
             }
+            
+            $myObj->pointsone = $pointsone;
+            $myObj->pointstwo = $pointstwo;
+            
+            $myJSON = json_encode($myObj);
+            $client->send($myJSON);
         }
     }
 
