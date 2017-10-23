@@ -25,11 +25,13 @@ class Points implements MessageComponentInterface {
     }
     
     public function startMatch() {
-        // zerujesz wynik i wysylasz zaaktualizowany
+        $this->pointsone = 0;
+        $this->pointstwo = 0;
     }
     
     public function endMatch() {
-        // zerujesz wynik
+        $this->pointsone = 0;
+        $this->pointstwo = 0;
     }
 
     public function onOpen(ConnectionInterface $conn) {
