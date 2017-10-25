@@ -10,7 +10,7 @@ use Ratchet\WebSocket\WsServer;
 // Make sure composer dependencies have been installed
 require __DIR__ . '/vendor/autoload.php';
 
- Points implements MessageComponentInterface {
+class Points implements MessageComponentInterface {
     protected $clients;
     protected $points;
     
