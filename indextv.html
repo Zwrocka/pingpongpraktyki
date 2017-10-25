@@ -8,46 +8,121 @@
       <style>
           #container
           {
-            width:240px;
-            height:200px;
-            border:2px solid black;
-            margin-left:400px;
+            width:1000px;
+            height:500px;
+            border:2px solid red;
+            margin-left:140px;
+            margin-top:50px;
+            background-color:gainsboro;
           }
           .case
           {
             float:left;
             padding:20px;
-            margin-top:0px; 
+            margin-top:0px;
+            margin-right:0px;
           }
-          .casee
+          .scoreupdate
           {
-            float:left;
-            padding:20px;
-            margin-top:0px;  
-          }
-          .case2
-          {
-              float:left;
-              padding:20px;
-              margin-top:0px;
+              margin-right:10px;
           }
           h1
           {
-              font-size:70px;
+              font-size:170px;
+          }
+          #box
+          {
+              border:auto;
+              margin-left:100px;
+          }
+          .case
+          {
+              border:auto;
+          }
+          p
+          {
+              font-size:25px;
+              padding:5px;
+          }
+          .teamone
+          {
+            border:3px solid crimson;
+            padding:5px;
+          }
+          .teamtwo
+          {
+            border:3px solid crimson; 
+          }
+          .vs
+          {
+              color:red;
+              font-size:25px;
+              margin-left:10px;
+          }
+          #tabela
+          {
+                border:2px solid black;
+                width:auto;
+                height:auto;
+                float:left;
+                margin-left:158px;
+                margin-top:15px;
+          }
+          h2
+          {
+              text-align:center;
+          }
+          .score
+          {
+             
+          }
+          .scoree
+          {
+           margin-left:30px;  
+          }
+          .members
+          {
+            
+          }
+          .memberss
+          {
+            
           }
       </style>
   </head>
   <body>
       <div id="container">
+          <div id="box">
           <div class=case>
+              <p class="teamone"></p>
 	  <h1 class="scoreupdate">0</h1>
               </div>
-          <div class=casee>
-	  <h1 class="scoreupdatenone">:</h1>
-              </div>
-        <div class="case2">
+          <div class=case>
+             <p class="vs">vs</p>
+              <h1 class="scoreupdatenone">:</h1>
+        </div>
+        <div class="case">
+        <p class="teamtwo"></p>
       <h1 class="scoreupdate2">0</h1>
         </div>
       </div>
+      
+<div id="tabela">
+    <table class="history">
+        <h2>Historia:</h2>
+        <tr>
+            <td class="score"></td>
+            <td></td>
+            <td class="scoree"></td>
+        </tr>
+        <tr>
+        <td class="members"></td>
+        <td></td>
+        <td class="memberss"></td>
+        </tr>
+    </table>
+      </div>
+    </div>
+    
   </body>
 </html>

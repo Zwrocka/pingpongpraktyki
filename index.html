@@ -7,61 +7,144 @@
       <style>
           #container
           {
-            width: 280px;
-            height:280px;
+            width: 1000px;
+            height:500px;
             border:3px solid black;
+            margin:auto;
+            margin-top:50px;
           }
           .box
           {
               float:left;
               padding:30px;
+              margin-left:60px;
               
           }
           .scoreupdatex
           {
               padding:10px;
+              margin-left:40px;
           }
           .scoreupdatey
           {
               padding:10px;
+              margin-left:45px;
+          }
+          .scoreupdat
+          {
+              margin-left:20px;
           }
           #przerwa
           {
               float:left;
-              margin-top:30px;     
+              margin-top:60px;
+              margin-left:25px;
+              padding:  10px;
           }
           h1
           {
               font-size:50px;
-              color:blue;
+              color:dimgre;
           }
           button
           {
-              border-radius:50%;
+              border-radius:10%;
               border:0px;
-              background-color:red;
-              font-size:31px;
+              background-color:crimson;
+              font-size:30px;
+              
+              
+          }
+          #game
+		{
+			border-right:2px solid black;
+			float:left;
+            width:300px;
+            height:500px;
+            margin-left:15px;
+          }
+          .gamebutton
+          {
+              margin-left:15px;
+              padding:7px;
+          }
+          .gamebuttonend
+          {
+              float:left;
+              padding:7px;
+              
+          }
+          #position
+          {
+              margin-left:15px;
+          }
+          .teamone
+          {
+              font-size:20px;
+              border:2px solid crimson;
+          }
+          .teamtwo
+          {
+              font-size:20px;
+              border:2px solid crimson;
+          }
+          k
+          {
+              color:darkred;
+              font-size:20px;
+          }
+          .minus
+          {
+              padding:30px;
+              margin-top:25px;
+              
+          }
+          .minuss
+          { 
+              padding: 30px;
+              margin-top:25px;
+              
+          }
+          .plus
+          {
+              padding:30px;
+              margin-top:25px;
+          }
+          .pluss
+          {
+             padding: 30px;
+                margin-top:25px;
           }
       </style>
   </head>
 
   <body>
-      <input type="text" class="fist-player-name"/>
-      
-      button
       <div id="container">
+    <div id="game">
+    <h1>Nowa gra</h1>    
+        <k>Zespół 1:</k><input class="teamone" type="text"><br/>
+        <k>Zespół 2:</k><input class="teamtwo" type="text"><br/><br/>
+    <div id="position">
+	<button class="gamebutton">Start</button>
+	<button class="gamebuttonend">Zakończ</button>
+	</div>
+          </div>
+          
       <div class="box">
+        <p class="player"><p>
       <h1 class="scoreupdatex">0</h1>
-	  <button class="plus">+</button>
-	  <button class="minus">-</button>
+          <button class="minus">-</button>
+          <button class="plus">+</button>
+	  
       </div>
           <div id="przerwa">
         <h1 class="scoreupdat">:</h1>
           </div>
       <div class="box">
+        <p class="player2"><p>
       <h1 class="scoreupdatey">0</h1>
-	  <button class="pluss">+</button>
-	  <button class="minuss">-</button>
+          <button class="minuss">-</button> 
+          <button class="pluss">+</button>
           </div>
       </div>
   </body>
