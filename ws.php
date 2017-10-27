@@ -5,8 +5,6 @@ use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 
-//include('conf.php');
-
 // Make sure composer dependencies have been installed
 require __DIR__ . '/vendor/autoload.php';
 
@@ -21,9 +19,35 @@ class Points implements MessageComponentInterface {
         $this->pointsone=0;
         $this->pointstwo=0;
         
-        //$this->$connect = mysqli_connect($host, $db_user, $password, $db_name);
+        //DATA BASE CONFIG
+        $host = 'addsme.com'; //host name
+        $db_user = 'elfreits_pp'; //user name
+        $password = 'UVOJjI71'; //password
+        $db_name = 'elfreits_pingpong'; //name data base
+        
+        //CONNECT WITH DATABASE
+        $this->connect = mysqli_connect($host, $db_user, $password, $db_name);
        
+        $this->getHistoryFromDB();
+        
         echo "Server is started \n";
+    }
+    
+    public function getHistoryFromDB() {
+        $return_arr = array();
+        $query = mysqli_query($this->connect, "SELECT * FROM ppmatch");
+
+        while ($history = mysqli_fetch_array($query)) {
+            $row_array['id'] = $history['id'];
+            $row_array['nameone'] = $history['nameone'];
+            $row_array['nametwo'] = $history['nametwo'];
+            array_push($return_arr,$row_array);
+        }
+        
+        $json = json_encode($return_arr);
+        echo $json;
+        
+        return $json;
     }
     
     public function onOpen(ConnectionInterface $conn) {
@@ -33,14 +57,24 @@ class Points implements MessageComponentInterface {
         $this->myObj->action = 'initialScore';
         $this->myObj->data->pointsone = $this->pointsone;
         $this->myObj->data->pointstwo = $this->pointstwo;
+        $this->myObj->data->team_one = $this->current_team_one;
+        $this->myObj->data->team_two = $this->current_team_two;
 
         $myJSON = json_encode($this->myObj);
         
         $conn->send($myJSON);
+        
+        $query = mysqli_query($this->connect, "SELECT * FROM ppmatch");
+        $history = mysqli_fetch_array($query);
+        
+        $myhistory = json_encode($history);
+        $conn->send($myhistory);
+
         echo "client connected \n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
+        
         // reagujesz na dwa nowe wiadomosc - startMatch i endMatch
         $msg_json = json_decode($msg);
         if($msg_json->action=='startGame'){
@@ -56,6 +90,10 @@ class Points implements MessageComponentInterface {
             
             echo "Start game is succesfull \n";
         }
+        else if($msg_json->action=='getHistory') {
+            $this->myObj->data->history = $this->getHistoryFromDB();
+            $this->myObj->action = 'sendHistory';
+        }
         else if($msg_json->action=='stopGame'){
             $lastMatch = new stdClass();
             $lastMatch->team_one = $this->current_team_one;
@@ -66,11 +104,11 @@ class Points implements MessageComponentInterface {
 
             array_push($this->gameHistory, $lastMatch);
             
-            echo "log: ".json_encode($lastMatch)."\n";
+            echo "last match info: ".json_encode($lastMatch)."\n";
             
-            //mysqli_query($connect, "SET CHARSET utf8");
-	        //mysqli_query($connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
-            //mysqli_query($connect, "INSERT INTO math VALUES (NULL, '$lastMatch->team_one', '$lastMatch->team_two', '$lastMatch->pointsone', '$lastMatch->pointstwo')");
+            mysqli_query($this->connect, "SET CHARSET utf8");
+	        mysqli_query($this->connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
+            mysqli_query($this->connect, "INSERT INTO ppmatch VALUES (NULL, '$lastMatch->team_one', '$lastMatch->team_two', '$lastMatch->pointsone', '$lastMatch->pointstwo')");
             
             $this->pointsone = 0;
             $this->pointstwo = 0;
@@ -80,19 +118,19 @@ class Points implements MessageComponentInterface {
         } else {
             if($msg_json->action=='incrementFirst'){
                 $this->pointsone++;
-                echo 'inc: '.$this->pointsone."\n";
+                echo 'team one inc: '.$this->pointsone."\n";
             }
-            else if ($msg_json->action=='decrementFirst'){
+            else if ($msg_json->action=='decrementFirst' && $this->pointsone > 0){
                 $this->pointsone--;
-                echo 'dec: '.$this->pointsone."\n";
+                echo 'team one dec: '.$this->pointsone."\n";
             }
             else if ($msg_json->action=='incrementSecond'){
                 $this->pointstwo++;
-                echo 'inc: '.$this->pointstwo."\n";
+                echo 'team two inc: '.$this->pointstwo."\n";
             }
-            else if ($msg_json->action=='decrementSecond'){
+            else if ($msg_json->action=='decrementSecond' && $this->pointstwo > 0){
                 $this->pointstwo--;
-                echo 'dec: '.$this->pointstwo."\n";
+                echo 'tedec: '.$this->pointstwo."\n";
             }
             else{
                 echo 'Error: value message is '.$msg." ! \n";
@@ -114,7 +152,7 @@ class Points implements MessageComponentInterface {
     }
 
     public function onClose(ConnectionInterface $conn) {
-        $this->clients->detach($conn);        
+        $this->clients->detach($conn);
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
